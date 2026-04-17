@@ -2,5 +2,8 @@
   "name": "maarheeze/guidelines",
   "description": "maarheeze guidelines",
   "type": "library",
-  "license": "MIT"
+  "license": "MIT",
+  "suggest": {
+    "maarheeze/boost-guidelines": "Auto-discover guidelines from all packages when using Laravel Boost"
+  }
 }
