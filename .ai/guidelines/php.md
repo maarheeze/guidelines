@@ -14,6 +14,8 @@
 - Prefer single quotes (`''`) over double quotes (`""`)
 - Do not use FQDN for classes and functions — import them all
 - Always sort imports alphabetically
+- Never use abbreviations: write the full value in variables, methods etc.
+- Enum cases are always in capitals with underscores (e.g. UserRole::ORGANISATION_ADMN)
 
 ## Type Hints & Docblocks
 
@@ -65,3 +67,8 @@ public function collect(array $items): Collection
 
 - Exception messages must be static — no runtime variables interpolated into the message string
 - If more context is needed for debugging, add a log message with optional context alongside the throw
+
+## Value objects
+
+- Use or create valueObjects where applicable, instead of accepting a string where valiation is required (e.g. uuid, email-address etc)
+- Use valueObject comparison methods instead where possible, instead of comparing the (string) value from it

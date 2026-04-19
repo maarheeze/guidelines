@@ -11,6 +11,8 @@
 - Do not make any changes when a question is asked, wait for clear instructions before making any changes
 - Never leave dead code — use it or remove it
 - Don't over-engineer — solve what's asked, nothing more
+- Start every response after completing an operation with "Done!" followed by a short description of what was done.
+- If a question is asked where an answer is expected, only answer the question and do not start modifications without approval
 
 ## Code Generation
 

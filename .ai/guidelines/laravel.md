@@ -43,3 +43,11 @@
 - Translation keys should reflect the concept, not per se the database column — use `organisation` not `organisation_id`
 - For relation field labels, reuse the related model's `model_label` translation instead of duplicating the concept (e.g. `Trans::string('organisation.model_label')` instead of adding `organisation` to the current model's lang file)
 - If the app uses translations, use them everywhere — including Blade views; never use hardcoded strings
+
+## Forms & Requests
+
+- Use FormRequests for validation — never call `$request->validate()` inside a controller
+
+## Redirects
+
+- Never use redirect()->back(): always explicitly route to the correct location
