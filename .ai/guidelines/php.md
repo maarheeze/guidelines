@@ -16,6 +16,8 @@
 - Always sort imports alphabetically
 - Never use abbreviations: write the full value in variables, methods etc.
 - Enum cases are always in capitals with underscores (e.g. UserRole::ORGANISATION_ADMN)
+- Prefer early returns instead of mutliple inline AND/OR checks  
+- Do not assign unused variables
 
 ## Type Hints & Docblocks
 
