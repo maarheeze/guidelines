@@ -11,6 +11,7 @@
 - When creating a migration, do not create the down migrations
 - In migrations, separate these groups with a blank line in this order: id, foreign keys, fields, timestamps (incl. softDeletes if any), indexes
 - Single-column indexes go inline on the column definition (e.g. `->index()`, `->unique()`); the indexes group is only for multi-column indexes
+- never use `->after()` to give a column a certain position
 
 ## Models
 
