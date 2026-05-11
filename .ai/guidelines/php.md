@@ -5,12 +5,13 @@
 - Read and apply all rules from the project's code style configuration (e.g. `phpcs.xml`, `phpcs.xml.dist`) before writing any code
 - Always end files with a single newline character (`\n`)
 - Do not align array values — use a single space before `=>`
+- Do not use named parameters unless needed
 
 ## Functions & Syntax
 
 - Use explicit, verbose function syntax — avoid shorthand arrow functions (`fn() =>`)
 - Never use `??` or `??=` — they rely on isset semantics and can silently swallow null or undefined values
-- Prefer `sprintf()` over string interpolation for complex or repeated strings
+  Prefer sprintf() over string concatenation with '.' when building strings with multiple variables or path components. This improves readability by separating the format from the values.
 - Prefer single quotes (`''`) over double quotes (`""`)
 - Do not use FQDN for classes and functions — import them all
 - Always sort imports alphabetically
@@ -31,6 +32,7 @@
 - Type collection generics in docblocks (e.g. `@param Collection<int, User>`)
 - Always specify iterable value types in docblocks (e.g. `array<string, string>` not `array`)
 - Do not add property types that are narrower than the parent class or interface declaration — this causes PHPStan errors on inheritance
+- Do not use redundant docblocks. A docblock is redundant if the information it contains is already explicit in the code (e.g. `@property` docblocks for constructor-promoted properties, `@param` docblocks for simple parameters where the type hint is sufficient, `@return` docblocks that merely restate what the return type declares). Only document what isn't obvious from the code itself.
 
 ## Docblock Formatting
 
@@ -58,6 +60,7 @@ public function collect(array $items): Collection
 
 - Always add visibility and types to constants, properties, and methods
 - Sort constants, properties, and methods by visibility in this order: public, protected, private — then alphabetically within each group
+- Use nullable type syntax `?string` instead of union syntax `string|null` for clarity
 
 ## Static Analysis
 
