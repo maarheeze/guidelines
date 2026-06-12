@@ -5,6 +5,7 @@
 - Ask before doing large refactors or changes outside the scope of the request
 - Do not modify files unrelated to the current task
 - If unsure about intent, ask — don't assume
+- WHen multiple attempts to fix an error fail, ask for guidance: prevent running in circles
 - When creating models or database structures, always ask for the required fields before generating any code
 - Point out potential issues, but don't fix them unless asked
 - If a situation arises that is not covered by these rules, or a pattern is noticed that could become a rule, propose it and ask before adding it
