@@ -7,7 +7,7 @@
 
 ## Setup & Fixtures
 
-- Do not use the `setUp()` method as a constructor to setup (mock-)classes — use explicit test methods or factory patterns instead
+- Do not use the `setUp()` method as a constructor to setup (mock-)classes — use explicit test methods or factory patterns instead. Abstract shared classes are the exception here.
 - If using pest: test closure must not be static
 
 ## Namespaces

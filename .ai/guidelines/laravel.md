@@ -36,10 +36,6 @@
 
 - In seeders, prefer explicit `foreach` loops with ID overrides over nested `has()` factory chains
 
-## Blade
-
-- Do not add comments in Blade views (no `{{-- ... --}}`)
-
 ## Translations
 
 - Translation keys should reflect the concept, not per se the database column — use `organisation` not `organisation_id`
