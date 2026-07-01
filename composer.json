@@ -1,6 +1,7 @@
 {
   "name": "maarheeze/guidelines",
   "description": "maarheeze guidelines",
+  "keywords": ["dev"],
   "type": "library",
   "license": "MIT",
   "suggest": {
