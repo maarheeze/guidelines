@@ -144,8 +144,9 @@ public function collect(array $items): Collection
 
 ## Value objects
 
-- Use or create valueObjects where applicable, instead of accepting a string where valiation is required (e.g. uuid, email-address etc)
-- Use valueObject comparison methods instead where possible, instead of comparing the (string) value from it
+- Use or create valueObjects where applicable, instead of accepting a string where validation is required (e.g. uuid, email-address etc)
+- Convert to the valueObject at the earliest boundary (e.g. an Eloquent cast, request validation, or the constructor), so the raw string never leaks past that boundary and the rest of the code always works with the valueObject
+- Use the valueObject's comparison methods instead of comparing its underlying (string) value
 
 ## String Handling
 
