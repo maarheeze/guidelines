@@ -5,6 +5,9 @@
 - Never use `DB::table()`, the `DB` facade, or any raw SQL (`selectRaw`, `whereRaw`, `orderByRaw`, etc.) — use Eloquent model queries instead
 - Avoid Laravel helper functions (e.g. `view()`, `app()`, `route()`, `now()`, `abort()`) — use dependency injection wherever possible; only fall back to helpers in genuinely static or framework-constrained contexts (e.g. static Filament resource methods, Livewire component methods) where constructor injection is not available
 - Never use `HasManyThrough` — move the query into the class that needs it instead
+- When a model casts a column to a value object, pass the value object straight to query methods (`where`, `find`, `findOrFail`, `whereKey`) and test helpers (`assertDatabaseHas`). Do not call `->toString()`; let the cast/binding handle it.
+- Only stringify a value object when the target API is typed `string` (e.g. a package method signature), not for Eloquent/query-builder calls.
+- `findOrFail($id)` where `$id` is typed as an interface value object resolves to a `Model|Collection` union under PHPStan. Use `->whereKey($id)->firstOrFail()` (returns the model) or assert via `assertDatabaseHas` instead.
 
 ## Migrations
 
@@ -25,6 +28,7 @@
     - Both groups are listed alphabetically
 - Every model must have a corresponding custom collection class in `app/Collections/` (e.g. `TaskCollection extends Collection`), with `newCollection()` overridden on the model
 - Use the typed collection everywhere the model appears as a collection (relation docblocks, return types, etc.)
+- Keep models thin: casts, relations, scopes, and simple accessors only. Business rules, guards, and invariants (e.g. "throw if there is no current X") belong in a helper/service/action, not a model method.
 
 ## Factories
 

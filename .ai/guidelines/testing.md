@@ -9,6 +9,13 @@
 
 - Do not use the `setUp()` method as a constructor to setup (mock-)classes — use explicit test methods or factory patterns instead. Abstract shared classes are the exception here.
 - If using pest: test closure must not be static
+- Build each test's arrange block inline; create only the data/state that specific test needs.
+- Never share a fixture that holds pre-built domain state across tests — no `InteractsWith…` trait and no `…State`/DTO returned by a shared helper and reused by many tests. Prefer duplicated inline setup over a shared state object.
+
+## Asserting persisted state
+
+- Assert persisted/projected state with `assertDatabaseHas(Model::class, [...])` (pass the model class, not a table-name string) rather than re-querying the model and asserting its properties.
+- Only load a model in a test when you need it to drive the test (e.g. to get an id to act on), never just to assert columns.
 
 ## Namespaces
 
@@ -34,3 +41,5 @@
 ## Writing tests
 
 - Never make try/catch-blocks in tests, use assertions and/or $this->expectException();
+- Every production class has its own test.
+- Pick the level by isolation: exercisable with no framework/container/I/O → unit test; needs framework, DB, or container → feature test using a factory.
