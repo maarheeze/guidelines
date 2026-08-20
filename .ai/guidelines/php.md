@@ -18,6 +18,7 @@
 - Enum cases are always in capitals with underscores (e.g. UserRole::ORGANISATION_ADMN)
 - Prefer early returns instead of mutliple inline AND/OR checks  
 - Do not assign unused variables
+- A variable holding a stringified identifier must say so — `$playerIdAsString`, not `$player`, `$buyer` or `$holder`. A bare noun promises the entity; an id or array key is not the thing it identifies
 
 ## Control Structure Spacing & Readability
 
