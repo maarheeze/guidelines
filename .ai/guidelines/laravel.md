@@ -5,9 +5,10 @@
 - Never use `DB::table()`, the `DB` facade, or any raw SQL (`selectRaw`, `whereRaw`, `orderByRaw`, etc.) — use Eloquent model queries instead
 - Avoid Laravel helper functions (e.g. `view()`, `app()`, `route()`, `now()`, `abort()`) — use dependency injection wherever possible; only fall back to helpers in genuinely static or framework-constrained contexts (e.g. static Filament resource methods, Livewire component methods) where constructor injection is not available
 - Never use `HasManyThrough` — move the query into the class that needs it instead
-- When a model casts a column to a value object, pass the value object straight to query methods (`where`, `find`, `findOrFail`, `whereKey`) and test helpers (`assertDatabaseHas`). Do not call `->toString()`; let the cast/binding handle it.
+- Pass value objects straight to query methods (`where`, `whereKey`) and test helpers (`assertDatabaseHas`). Do not call `->toString()` — casts play no part in query bindings; the binding stringifies the object via `__toString()`.
+- Never pass a model to `where()` — it binds the model's JSON and silently matches nothing. Use `whereKey()` or `$model->getKey()`
 - Only stringify a value object when the target API is typed `string` (e.g. a package method signature), not for Eloquent/query-builder calls.
-- `findOrFail($id)` where `$id` is typed as an interface value object resolves to a `Model|Collection` union under PHPStan. Use `->whereKey($id)->firstOrFail()` (returns the model) or assert via `assertDatabaseHas` instead.
+- Use `whereKey($valueObject)->firstOrFail()`, not `findOrFail($valueObject)` — `findOrFail` also accepts arrays, so it returns `Model|Collection` and fails PHPStan at max
 
 ## Migrations
 
