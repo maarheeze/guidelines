@@ -174,3 +174,11 @@ Before committing refactored code:
 - Private helpers return values for control flow
 - All files pass PHPStan at configured level
 - Consistent spacing around control structures
+
+## Exceptions
+- Throw a custom exception when the caller is expected to catch it and act on it; throw an SPL exception when it signals a bug and nobody should catch it
+- Group custom exceptions under one abstract base per domain, so a caller can catch the whole category in one place
+- Name custom exceptions after the rule violated, not the method or class that threw (e.g. `NotEnoughSharesInBank`, not `MarketException`)
+- Custom exceptions carry context as typed constructor properties — this is how you add detail without breaking the static-message rule
+- For bugs, pick the SPL type that says which kind: `InvalidArgumentException` for a bad argument, `LogicException` for a state that should be unreachable. `RuntimeException` for everything erases that distinction
+- Tests assert the exception class, never the message text
