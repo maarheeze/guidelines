@@ -43,3 +43,5 @@
 - Never make try/catch-blocks in tests, use assertions and/or $this->expectException();
 - Every production class has its own test.
 - Pick the level by isolation: exercisable with no framework/container/I/O → unit test; needs framework, DB, or container → feature test using a factory.
+- Assign the subject of a boolean assertion to a named variable when its argument is a call that itself takes arguments — the assertion should read "x is false", not restate the whole scenario
+- One behaviour per test: if the test name needs an "and", or the body asserts both that something holds and that it does not, split it. The positive and negative case of the same predicate are two tests, not two assertions. Multiple assertions in one test are fine only when they describe a single outcome (e.g. every field of one returned object) 
