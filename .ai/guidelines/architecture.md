@@ -5,6 +5,8 @@
 - Prefer explicit over clever — readable code over compact code
 - Keep classes focused on a single responsibility
 - Prefer composition over inheritance
+- Never leave dead code — use it or remove it
+- When the same code is repeated in multiple places, extract it (constant/variable/method/class) and suggest this proactively
 
 ## Method Overrides
 

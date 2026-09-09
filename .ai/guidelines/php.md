@@ -3,7 +3,6 @@
 ## Code Style & Standards
 
 - Read and apply all rules from the project's code style configuration (e.g. `phpcs.xml`, `phpcs.xml.dist`) before writing any code
-- Always end files with a single newline character (`\n`)
 - Do not align array values — use a single space before `=>`
 - Do not use named parameters unless needed
 
@@ -11,14 +10,12 @@
 
 - Use explicit, verbose function syntax — avoid shorthand arrow functions (`fn() =>`)
 - Never use `??` or `??=` — they rely on isset semantics and can silently swallow null or undefined values
-- Prefer single quotes (`''`) over double quotes (`""`)
-- Do not use FQDN for classes and functions — import them all
-- Always sort imports alphabetically
 - Never use abbreviations: write the full value in variables, methods etc.
 - Enum cases are always in capitals with underscores (e.g. UserRole::ORGANISATION_ADMN)
 - Prefer early returns instead of mutliple inline AND/OR checks  
 - Do not assign unused variables
 - A variable holding a stringified identifier must say so — `$playerIdAsString`, not `$player`, `$buyer` or `$holder`. A bare noun promises the entity; an id or array key is not the thing it identifies
+- Never use names like `$data` or `$item` — use clear names that show intent
 
 ## Control Structure Spacing & Readability
 
@@ -94,7 +91,6 @@ private function processItem($item): ?Type {
 
 - Method docblocks are always multiline
 - Property `@var` docblocks are always single-line
-- Separate different type-groups (@template, @param, @return, etc.) with a blank line
 
 Example:
 ```php
@@ -114,7 +110,7 @@ public function collect(array $items): Collection
 
 ## Code Organization
 
-- Always add visibility and types to constants, properties, and methods
+- Always add types to constants, properties, and methods
 - Sort constants, properties, and methods by visibility in this order: public, protected, private — then alphabetically within each group
 - Use nullable type syntax `?string` instead of union syntax `string|null` for clarity
 - When a visitor's `enterNode()` or similar method has multiple sequential `if instanceof` checks, convert to a `match(true)` statement that delegates to private handler methods (one per node type)

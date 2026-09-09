@@ -20,6 +20,7 @@
 
 ## Models
 
+- When creating models or database structures, always ask for the required fields before generating any code
 - Always create a factory alongside a new model
 - Order methods as: Laravel override methods first (e.g. `casts()`, `booted()`), then relations alphabetically, then custom methods alphabetically
 - Models must have a class-level docblock with `@property` for every column not already covered by a used trait
