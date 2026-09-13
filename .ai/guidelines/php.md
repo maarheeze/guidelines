@@ -1,29 +1,16 @@
 # PHP Guidelines
 
-## Code Style & Standards
-
-- Read and apply all rules from the project's code style configuration (e.g. `phpcs.xml`, `phpcs.xml.dist`) before writing any code
-- Do not align array values — use a single space before `=>`
-- Do not use named parameters unless needed
+What the `Maarheeze` phpcs standard already enforces is not repeated here. This
+file is what no sniff can check.
 
 ## Functions & Syntax
 
-- Use explicit, verbose function syntax — avoid shorthand arrow functions (`fn() =>`)
+- Do not use named parameters unless needed
 - Never use `??` or `??=` — they rely on isset semantics and can silently swallow null or undefined values
 - Never use abbreviations: write the full value in variables, methods etc.
 - Enum cases are always in capitals with underscores (e.g. UserRole::ORGANISATION_ADMN)
-- Prefer early returns instead of mutliple inline AND/OR checks  
-- Do not assign unused variables
 - A variable holding a stringified identifier must say so — `$playerIdAsString`, not `$player`, `$buyer` or `$holder`. A bare noun promises the entity; an id or array key is not the thing it identifies
 - Never use names like `$data` or `$item` — use clear names that show intent
-
-## Control Structure Spacing & Readability
-
-- Always add a blank line BEFORE if-statements (unless immediately after opening brace)
-- Always add a blank line BEFORE return statements (unless at function start)
-- In loops, add blank line before return/break statements
-- In nested loops/conditions: blank line between distinct operations
-- `foreach` directly followed by `if` is acceptable (when testing the loop item)
 
 ## Match Statements & Conditionals
 
@@ -74,23 +61,16 @@ private function processItem($item): ?Type {
 
 ## Type Hints & Docblocks
 
-- Always typehint parameters and return types, including `void`
-- Add docblocks for array shapes (e.g. `array<string, int>`)
 - Never use `/** @var Type $var */` inline docblocks as type assertions
     - Prefer generics (e.g. `@extends ParentClass<ConcreteType>`) to narrow types through the type system
     - Fall back to `Assert::isInstanceOf($var, Type::class)` from `webmozart/assert` when generics are not available
     - If `webmozart/assert` is not installed, suggest adding it via `composer require webmozart/assert`
 - Always add `@template` and `@extends`/`@implements` generics to interfaces and classes where applicable
-- Type collection generics in docblocks (e.g. `@param Collection<int, User>`)
-- Always specify iterable value types in docblocks (e.g. `array<string, string>` not `array`)
 - Do not add property types that are narrower than the parent class or interface declaration — this causes PHPStan errors on inheritance
-- Do not use redundant docblocks. A docblock is redundant if the information it contains is already explicit in the code (e.g. `@property` docblocks for constructor-promoted properties, `@param` docblocks for simple parameters where the type hint is sufficient, `@return` docblocks that merely restate what the return type declares). Only document what isn't obvious from the code itself.
-- @var docblocks on properties must include the variable name: @var type $variableName (not `@var type` (missing variable) — always show what's being documented)
 
 ## Docblock Formatting
 
 - Method docblocks are always multiline
-- Property `@var` docblocks are always single-line
 
 Example:
 ```php
@@ -110,9 +90,7 @@ public function collect(array $items): Collection
 
 ## Code Organization
 
-- Always add types to constants, properties, and methods
-- Sort constants, properties, and methods by visibility in this order: public, protected, private — then alphabetically within each group
-- Use nullable type syntax `?string` instead of union syntax `string|null` for clarity
+- Sort constants, properties, and methods alphabetically within each visibility group
 - When a visitor's `enterNode()` or similar method has multiple sequential `if instanceof` checks, convert to a `match(true)` statement that delegates to private handler methods (one per node type)
 
 ## Class & Responsibility Boundaries
@@ -136,8 +114,14 @@ public function collect(array $items): Collection
 
 ## Exceptions
 
+- Throw a custom exception when the caller is expected to catch it and act on it; throw an SPL exception when it signals a bug and nobody should catch it
+- For bugs, pick the SPL type that says which kind: `InvalidArgumentException` for a bad argument, `LogicException` for a state that should be unreachable. `RuntimeException` for everything erases that distinction
+- Group custom exceptions under one abstract base per domain, so a caller can catch the whole category in one place
+- Name custom exceptions after the rule violated, not the method or class that threw (e.g. `NotEnoughSharesInBank`, not `MarketException`)
 - Exception messages must be static — no runtime variables interpolated into the message string
+- Custom exceptions carry context as typed constructor properties — this is how you add detail without breaking the static-message rule
 - If more context is needed for debugging, add a log message with optional context alongside the throw
+- Tests assert the exception class, never the message text
 
 ## Value objects
 
@@ -169,12 +153,3 @@ Before committing refactored code:
 - No nested conditionals deeper than 2 levels
 - Private helpers return values for control flow
 - All files pass PHPStan at configured level
-- Consistent spacing around control structures
-
-## Exceptions
-- Throw a custom exception when the caller is expected to catch it and act on it; throw an SPL exception when it signals a bug and nobody should catch it
-- Group custom exceptions under one abstract base per domain, so a caller can catch the whole category in one place
-- Name custom exceptions after the rule violated, not the method or class that threw (e.g. `NotEnoughSharesInBank`, not `MarketException`)
-- Custom exceptions carry context as typed constructor properties — this is how you add detail without breaking the static-message rule
-- For bugs, pick the SPL type that says which kind: `InvalidArgumentException` for a bad argument, `LogicException` for a state that should be unreachable. `RuntimeException` for everything erases that distinction
-- Tests assert the exception class, never the message text

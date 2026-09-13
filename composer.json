@@ -1,10 +1,10 @@
 {
-  "name": "maarheeze/guidelines",
-  "description": "maarheeze guidelines",
-  "keywords": ["dev"],
-  "type": "library",
-  "license": "MIT",
-  "suggest": {
-    "maarheeze/boost-guidelines": "Auto-discover guidelines from all packages when using Laravel Boost"
-  }
+    "name": "maarheeze/guidelines",
+    "description": "maarheeze guidelines",
+    "keywords": ["dev"],
+    "type": "library",
+    "license": "MIT",
+    "suggest": {
+        "maarheeze/boost-guidelines": "Auto-discover guidelines from all packages when using Laravel Boost"
+    }
 }
