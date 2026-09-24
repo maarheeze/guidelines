@@ -10,7 +10,7 @@ composer require maarheeze/guidelines --dev
 
 ## With Laravel Boost
 
-If using Laravel Boost, also install:
+If using [Laravel Boost](https://github.com/laravel/boost), also install:
 
 ```bash
 composer require maarheeze/boost-guidelines --dev
