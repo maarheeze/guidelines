@@ -1,25 +1,28 @@
 # Filament Guidelines
 
-## Relation Managers
+## You are writing a relation manager
 
-- `$relationship` in relation managers must be `static`
+- `$relationship` is `static`, or Filament never reads it
 
-## Actions
+## You are creating a custom action class
 
-- When creating a custom action class, override `make()` instead of `setUp()` to configure it via the fluent interface
-- Name custom action classes after what they do, not the models they relate to (e.g. `AttachWithDescriptionAction`, not `EventVolunteerAttachAction`)
+- Override `make()`, not `setUp()`, so it configures through the fluent interface
+- Name it after what it does, not the models it relates to —
+  `AttachWithDescriptionAction`, not `EventVolunteerAttachAction`
 
-## Tables
+## You are marking a table column `->searchable()`
 
-- Columns marked `->searchable()` in a Filament table must have a corresponding database index
-- Add indexes inline on the column definition using `->index()`
+- That column needs a database index. Add it inline on the column definition with
+  `->index()` in the migration
 
-## Schema Organization
+## You are writing a form, table or infolist definition
 
-- Extract form, table, and infolist definitions into separate schema classes under `Schemas/`
-- Use `configure(Schema $schema): Schema` as the main entry point
-- Use `getComponents(): array<Component>` for individual component access
+- It goes in its own schema class under `Schemas/`, never inline on the resource
+- `configure(Schema $schema): Schema` is the entry point
+- `getComponents(): array<Component>` exposes the individual components
 
-## Namespaces
+## You are about to type a Filament class name
 
-- Always verify class namespaces against the installed vendor source before using them
+- Verify the namespace against the installed vendor source first. Filament moves
+  classes between namespaces across versions, and a remembered path resolves to
+  nothing

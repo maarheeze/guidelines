@@ -1,6 +1,6 @@
 # Guidelines
 
-Development guidelines for AI agents and developers.
+Development guidelines for AI agents.
 
 ## Installation
 
