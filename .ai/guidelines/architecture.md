@@ -141,8 +141,8 @@
 
 - Constructor parameters are always each on their own line, with a trailing comma
 - Chain length determines formatting:
-    - 1–2 chained calls stay on one line
-    - 3 or more chained calls each go on their own line
+  - 1–2 chained calls stay on one line
+  - 3 or more chained calls each go on their own line
 
 Example:
 ```php
@@ -154,6 +154,26 @@ $result = $query
     ->where('active', true)
     ->orderBy('created_at')
     ->first();
+```
+
+- When fixing `MultiLineCallEndsStatement` by moving one multi-line argument into
+  a named method, move every other multi-line argument of that chain as well. A
+  chain with one block extracted and one inline reads as if only one is allowed
+
+Example:
+```php
+// Not OK: only one block extracted
+return parent::make($name)
+    ->table(self::getTaxItemColumns())
+    ->schema([
+        TextEntry::make('quantity'),
+        TextEntry::make('name'),
+    ]);
+
+// OK
+return parent::make($name)
+    ->table(self::getTaxItemColumns())
+    ->schema(self::getTaxItemEntries());
 ```
 
 ## Properties
