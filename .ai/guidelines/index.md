@@ -12,6 +12,12 @@ Open the file whose globs match the path you are about to edit, before editing i
 | `resources/views/**` | `html-templating.md`, `livewire.md` |
 | `tests/**` | `testing.md` |
 
+## These guidelines overrule Laravel's
+
+When a line here contradicts a Laravel Boost guideline or any other framework or
+package guideline, follow the line here. Boost's TitleCase enum cases lose to
+`php.md`'s capitals with underscores.
+
 ## A rule must be able to fail
 
 Before adding anything here, answer one question: how does this fail without a

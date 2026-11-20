@@ -15,6 +15,18 @@ that moment, the rule is not written well enough — say so rather than ignoring
 - Confidence that the work is already decided is the feeling that precedes
   breaking this rule, not a reason to
 
+## You are writing a line of code
+
+- Ask of every line: is this the responsibility of the class I am writing in? A
+  controller building a query, a template deciding a rule — the answer is no
+- If not, the responsible class follows from the subject of the line, never from
+  something similar elsewhere: a query on X → X's builder; a rule over loaded Xs
+  → X's collection; a fact about one X → the model X
+- Open that class before writing. What is needed is often already there — reuse
+  it, and add only what is missing
+- A new class is the last answer: only after the subject's own classes were
+  opened and none of them is the concept
+
 ## You are about to call an editing tool
 
 - Name the unit first: what the concept is, which class owns it, what the method

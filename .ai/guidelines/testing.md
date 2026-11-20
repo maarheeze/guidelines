@@ -37,7 +37,9 @@
 - One behaviour per test. If the name needs an "and", or the body asserts both
   that something holds and that it does not, split it. Several assertions are
   fine only when they describe one outcome
-- Never write try/catch in a test — use `$this->expectException()`
+- Never write try/catch in a test. In PHPUnit use `$this->expectException()`; in
+  Pest chain `->throws()` on the test, since `expectException()` is protected and
+  an IDE flags calling it from the test closure
 - Assign the subject of a boolean assertion to a named variable when its argument
   is itself a call with arguments: the assertion should read "x is false"
 
