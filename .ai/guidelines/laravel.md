@@ -33,6 +33,21 @@
 - A schema `->default()` on a column something else also writes is a second writer
   for that value. Pick one
 
+## You are about to change data in a migration
+
+- Only to convert existing data into the shape the code from this release reads:
+  a renamed key, a reshaped value, a moved column. The migration's place in the
+  schema history is the point, because it runs while the old shape still exists.
+  A command runs against whatever schema is there that day
+- Touch only rows still in the old shape, so a second run changes nothing
+- Never use application code: no models, casts, enums, services or config. Only
+  the schema builder, the query builder and static values. The application
+  changes later, the migration must not. This outranks § Database & Queries for
+  migrations
+- Never insert data (roles, settings, defaults) or fix up data for reasons of its
+  own. That belongs in a seeder or a command, which runs when someone decides it
+  should
+
 ## Models
 
 - When creating models or database structures, always ask for the required fields
