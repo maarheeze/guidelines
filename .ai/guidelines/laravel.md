@@ -62,9 +62,9 @@
     - Nullable columns get `?type`
     - Follow with a blank line and `@property-read` for every relation
     - Both groups are listed alphabetically
-- Every model must have a corresponding custom collection class in
-  `app/Collections/` (e.g. `TaskCollection extends Collection`), with
-  `newCollection()` overridden on the model
+- Every model must have a corresponding custom collection class in a
+  `Collections` folder next to the `Models` folder (e.g. `TaskCollection
+  extends Collection`), with `newCollection()` overridden on the model
 - Use the typed collection everywhere the model appears as a collection
 - Keep models thin: casts, relations, scopes and simple accessors only. Business
   rules, guards and invariants belong in a service or action

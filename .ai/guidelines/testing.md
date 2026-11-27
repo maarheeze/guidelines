@@ -164,7 +164,7 @@
 
 - PHPUnit test method names are camelCase (`testReturnsNullWhenNoMatch`); Pest
   test names are snake_case
-- Test folders mirror the application's: `app/Service/ExampleService.php` →
+- Test folders mirror the source folders: `Services/ExampleService.php` →
   `tests/Feature/Services/ExampleServiceTest.php`
 - Use named routes, not hardcoded URLs
 

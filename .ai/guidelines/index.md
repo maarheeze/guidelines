@@ -4,12 +4,11 @@ Open the file whose globs match the path you are about to edit, before editing i
 
 | Globs | File |
 |---|---|
-| `**/*.php` | `architecture.md`, `php.md` |
-| `app/**`, `database/**`, `routes/**`, `config/**` | `laravel.md` |
-| `app/Aggregates/**`, `app/Projectors/**`, `**/Events/**` | `event-sourcing.md` |
-| `app/Filament/**` | `filament.md` |
-| `app/Livewire/**`, `resources/js/**` | `livewire.md` |
-| `resources/views/**` | `html-templating.md`, `livewire.md` |
+| `**/*.php` | `architecture.md`, `php.md`, `laravel.md` |
+| `**/Aggregates/**`, `**/Projectors/**`, `**/Events/**` | `event-sourcing.md` |
+| `**/Filament/**` | `filament.md` |
+| `**/Livewire/**`, `**/js/**` | `livewire.md` |
+| `**/views/**` | `html-templating.md`, `livewire.md` |
 | `tests/**` | `testing.md` |
 
 ## These guidelines overrule Laravel's
