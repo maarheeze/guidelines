@@ -30,6 +30,22 @@ session. The hook downloads this repository, or updates its copy in
 `~/.cache/maarheeze-guidelines/`, so a change pushed here arrives at the next session
 start. Without a connection, the last downloaded copy is used.
 
+## Guidelines from packages
+
+A Composer package can ship guidelines for the projects that install it, in the same
+layout as this repository: `.ai/guidelines/always/` and `.ai/guidelines/index.md`.
+The hook loads them from the project's `vendor/`, on top of these guidelines.
+
+## Building on these guidelines
+
+A company or team repository can use these guidelines as its base. Its own hook
+script downloads this repository and runs it with its own guidelines directory as
+the top layer:
+
+```bash
+bash "$base/hooks/session-start.sh" "Acme" "/path/to/acme/.ai/guidelines"
+```
+
 ## Two delivery paths
 
 Guidelines reach an agent in one of two ways, and which one a file uses is decided by
