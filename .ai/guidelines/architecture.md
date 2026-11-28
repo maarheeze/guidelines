@@ -21,6 +21,22 @@
   the relation, not in the caller; shared markup in the component, not in the
   second template
 
+## Where a file lives
+
+- Before creating a file or folder, name what it is. Its name and location say
+  that, not where it was first needed: a generic building block is not named
+  after the one page that uses it
+- Folders and namespaces group by concept or by area of the application. Views
+  and the classes behind them use the same grouping, so one is found from the
+  other
+- Something generic lives in a shared place under a generic name, even while
+  only one area uses it; something specific lives with the area it belongs to
+- Before adding a file to a folder whose name does not describe it, split or
+  dissolve the folder instead. A folder its name cannot describe becomes the
+  place for whatever has no home
+- A name that does not say what something is will not be found when it is
+  needed, and gets built a second time
+
 ## A shaped array in a signature is a missing type
 
 - `@param array<string, int>` or `@return array<int, ?Uuid>` crossing a class
