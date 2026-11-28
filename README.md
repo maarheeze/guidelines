@@ -2,21 +2,33 @@
 
 Development guidelines for AI agents.
 
-## Installation
+## Use it in a project
 
-```bash
-composer require maarheeze/guidelines --dev
+Commit this to the project as `.claude/settings.json`. If the file already exists,
+add the `hooks` key to it.
+
+```json
+{
+    "hooks": {
+        "SessionStart": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "d=\"$HOME/.cache/maarheeze-guidelines\"; if [ -d \"$d/.git\" ]; then git -c http.lowSpeedLimit=1000 -c http.lowSpeedTime=10 -C \"$d\" pull -q --ff-only; else git -c http.lowSpeedLimit=1000 -c http.lowSpeedTime=10 clone -q --depth 1 https://github.com/maarheeze/guidelines.git \"$d\"; fi >/dev/null 2>&1; if [ -f \"$d/hooks/session-start.sh\" ]; then bash \"$d/hooks/session-start.sh\"; else echo 'The guidelines could not be downloaded. Tell the user before starting the task.'; fi",
+                        "timeout": 30
+                    }
+                ]
+            }
+        ]
+    }
+}
 ```
 
-## With Laravel Boost
-
-If using [Laravel Boost](https://github.com/laravel/boost), also install:
-
-```bash
-composer require maarheeze/boost-guidelines --dev
-php artisan boost:install
-php artisan boost:update --discover
-```
+Whoever checks out the project and trusts the folder gets the guidelines in every
+session. The hook downloads this repository, or updates its copy in
+`~/.cache/maarheeze-guidelines/`, so a change pushed here arrives at the next session
+start. Without a connection, the last downloaded copy is used.
 
 ## Two delivery paths
 
@@ -45,7 +57,3 @@ Add the file to the table in `index.md`, with the globs it applies to:
 The index is the only route to a file, so one that is missing from the table is never
 delivered. The file itself says nothing about its own scope — the table is the single
 place globs are written down.
-
-## Override in Your Project
-
-Add `.ai/guidelines/` files to override any guideline.
