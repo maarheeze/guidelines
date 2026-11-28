@@ -3,8 +3,7 @@
 # Puts the guidelines in the session's context, in this order:
 #
 # 1. the guidelines in this repository
-# 2. the guidelines that the project's Composer packages ship in .ai/guidelines/
-# 3. every layer passed as a name and a directory, each one on top of the last:
+# 2. every layer passed as a name and a directory, each one on top of the last:
 #    session-start.sh volbyte /path/to/.ai/guidelines
 #
 # Run by the session-start hook that projects commit in .claude/settings.json.
@@ -12,7 +11,6 @@
 set -u
 
 guidelines="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/.ai/guidelines"
-project_directory="${CLAUDE_PROJECT_DIR:-${PWD}}"
 
 print_layer() {
     local name="$1"
@@ -37,18 +35,6 @@ printf 'Before editing a file, open the files whose globs match its path, from e
 printf 'index below. Each layer after the first is on top of the ones before it.\n\n'
 
 print_layer "Base" "${guidelines}"
-
-for layer in "${project_directory}"/vendor/*/*/.ai/guidelines; do
-    [ -d "${layer}" ] || continue
-
-    package="${layer#"${project_directory}/vendor/"}"
-    package="${package%/.ai/guidelines}"
-
-    # Projects that still install this repository through Composer.
-    [ "${package}" = "maarheeze/guidelines" ] && continue
-
-    print_layer "Package ${package}" "${layer}"
-done
 
 while [ "$#" -ge 2 ]; do
     print_layer "$1" "$2"
