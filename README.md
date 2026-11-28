@@ -64,6 +64,8 @@ Add the file to the table in `index.md`, with the globs it applies to:
 | `**/*.php` | `php.md` |
 ```
 
+Write each rule in the format described in `index.md` › Writing a rule.
+
 The index is the only route to a file, so one that is missing from the table is never
 delivered. The file itself says nothing about its own scope — the table is the single
 place globs are written down.

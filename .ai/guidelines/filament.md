@@ -1,28 +1,35 @@
-# Filament Guidelines
+# Filament
 
-## You are writing a relation manager
+## Relation managers
 
-- `$relationship` is `static`, or Filament never reads it
+When you are about to write a relation manager: its `$relationship` MUST be
+`static`. Why: Filament never reads it otherwise.
 
-## You are creating a custom action class
+## Custom actions
 
-- Override `make()`, not `setUp()`, so it configures through the fluent interface
-- Name it after what it does, not the models it relates to —
-  `AttachWithDescriptionAction`, not `EventVolunteerAttachAction`
+When you are about to create a custom action class:
 
-## You are marking a table column `->searchable()`
+- It MUST override `make()`, not `setUp()`, so it configures through the fluent
+  interface.
+- It MUST be named after what it does, not the models it relates to:
+  `AttachWithDescriptionAction`, not `EventVolunteerAttachAction`.
 
-- That column needs a database index. Add it inline on the column definition with
-  `->index()` in the migration
+## Searchable columns
 
-## You are writing a form, table or infolist definition
+When you are about to mark a table column `->searchable()`: the column MUST get a
+database index, inline on its definition in the migration with `->index()`.
 
-- It goes in its own schema class under `Schemas/`, never inline on the resource
-- `configure(Schema $schema): Schema` is the entry point
-- `getComponents(): array<Component>` exposes the individual components
+## Schemas
 
-## You are about to type a Filament class name
+When you are about to write a form, table or infolist definition:
 
-- Verify the namespace against the installed vendor source first. Filament moves
-  classes between namespaces across versions, and a remembered path resolves to
-  nothing
+- It MUST be its own schema class under `Schemas/`, never inline on the
+  resource.
+- Its entry point MUST be `configure(Schema $schema): Schema`, and it MUST expose
+  its individual components through `getComponents(): array<Component>`.
+
+## Class names
+
+When you are about to type a Filament class name: you MUST first verify its
+namespace against the installed vendor source. Why: Filament moves classes
+between namespaces across versions, and a remembered path resolves to nothing.
